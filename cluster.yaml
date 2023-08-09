@@ -1,0 +1,34 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: cluster-in-existing-vpc
+  region: us-west-2
+  version: "1.27"
+
+vpc:
+  securityGroup: sg-a5c672c1
+  subnets:
+    private:
+      us-west-2a: { id: subnet-e9b7d69e }
+      us-west-2b: { id: subnet-ee97d48b }
+      us-west-2c: { id: subnet-01bc2adda2413c65f }
+
+
+fargateProfiles:
+  - name: fp-default
+    selectors:
+      # All workloads in the "default" Kubernetes namespace will be
+      # scheduled onto Fargate:
+      - namespace: default
+      # All workloads in the "kube-system" Kubernetes namespace will be
+      # scheduled onto Fargate:
+      - namespace: kube-system
+  - name: fp-dev
+    selectors:
+      # All workloads in the "dev" Kubernetes namespace matching the following
+      # label selectors will be scheduled onto Fargate:
+      - namespace: dev
+        labels:
+          env: dev
+          checks: passed

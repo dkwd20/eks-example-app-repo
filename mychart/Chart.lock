@@ -1,0 +1,9 @@
+dependencies:
+- name: mysubchart
+  repository: file://subcharts/mysubchart
+  version: 0.1.0
+- name: mysubchart2
+  repository: file://subcharts/mysubchart2
+  version: 0.1.0
+digest: sha256:02a2e0896cd4d9b1a74c63250ee2fc1bb8248127c70778c85849766093c97f1c
+generated: "2023-08-09T12:33:08.923441-07:00"
